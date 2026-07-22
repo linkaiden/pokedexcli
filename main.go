@@ -1,9 +1,15 @@
 package main
 
 import (
-	"fmt"
+	"github.com/linkaiden/pokedexcli/internal/pokeapi"
 )
 
 func main() {
-	fmt.Println("Hello, World!")
+	pokeClient := pokeapi.NewClient(pokeapi.DefaultClientTimeout, pokeapi.DefaultCacheReapInterval)
+	cfg := &config{
+		pokeapiClient: pokeClient,
+		pokedex:       make(map[string]pokeapi.Pokemon),
+	}
+
+	startREPL(cfg)
 }
